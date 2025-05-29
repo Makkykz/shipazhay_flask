@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_header %}{% if shipazhay %}{{ shipazhay.name }}{% else %}Детали Шипажая{% endif %}{% endblock %}
+
+{% block extrastyles %}
+<style>
+    .shipazhay-detail-img {
+        max-width: 70%; 
+        display: block; 
+        margin: 0 auto 25px auto; 
+        height: auto;
+        border-radius: 5px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15); 
+    }
+    .detail-content {
+        max-width: 700px; 
+        margin: 0 auto; 
+        padding: 15px;
+        /* background-color: #fff; убрано, так как main уже белый */
+        /* border-radius: 5px; убрано, так как main уже скруглен */
+    }
+    .detail-content p {
+        text-align: justify; 
+        line-height: 1.7; 
+        margin-bottom: 15px;
+    }
+    .detail-content strong {
+        color: #004d40; 
+    }
+    .booking-button-container {
+        text-align: center; 
+        margin-top: 30px; 
+        margin-bottom: 20px;
+    }
+    .booking-button {
+        background-color: #28a745; 
+        color: white; 
+        padding: 12px 25px; 
+        text-decoration: none; 
+        border-radius: 5px; 
+        font-size: 1.1em; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        transition: background-color 0.3s ease;
+    }
+    .booking-button:hover {
+        background-color: #218838;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    {% if shipazhay %}
+        <div class="detail-content">
+            {% if shipazhay.image %}
+                <img class="shipazhay-detail-img" src="{{ url_for('static', filename=shipazhay.image) }}" alt="{{ shipazhay.name }}">
+            {% endif %}
+            <p><strong>Расположение:</strong> {{ shipazhay.location }}</p>
+            <p>{{ shipazhay.description_full }}</p>
+
+            <div class="booking-button-container">
+                <a href="{{ url_for('booking_form', slug=shipazhay.slug) }}" class="booking-button">Забронировать этот Шипажай</a>
+            </div>
+        </div>
+    {% else %}
+        <div style="text-align:center; padding: 20px;">
+            <p>Информация о данном шипажае не найдена.</p>
+            <p><a href="{{ url_for('shipazhay_list') }}">Вернуться к списку шипажаев</a></p>
+        </div>
+    {% endif %}
+{% endblock %}

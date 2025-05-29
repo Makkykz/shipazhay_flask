@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }} - Шипажай{% endblock %}
+
+{% block page_header %}{{ title }}{% endblock %}
+
+{% block extrastyles %}
+<style>
+    .featured-shipazhay {
+        border: 1px solid #ccc;
+        padding: 15px; /* Увеличил отступы */
+        margin: 10px;
+        display: inline-block;
+        width: 300px;
+        vertical-align: top;
+        background-color: #fff;
+        border-radius: 5px; /* Немного больше скругления */
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Добавил тень */
+        text-align: left; /* Выравнивание текста внутри карточки по левому краю */
+    }
+    .featured-shipazhay img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 3px;
+        margin-bottom: 10px; /* Отступ под картинкой */
+    }
+    .featured-shipazhay h3 {
+        margin-top: 0; /* Убрал верхний отступ у заголовка */
+        font-size: 1.2em; /* Чуть увеличил шрифт заголовка */
+    }
+    .featured-container {
+        text-align: center; /* Центрирует блоки карточек */
+        padding: 20px 0; /* Отступы сверху и снизу для секции */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<p style="text-align: center; font-size: 1.1em; margin-bottom: 30px;">Это главная страница сайта о шипажаях!</p>
+
+<h2 style="text-align: center; margin-bottom: 20px;">Избранные Шипажаи:</h2>
+<div class="featured-container">
+{% if shipazhays %}
+    {% for shipazhay in shipazhays %}
+        <div class="featured-shipazhay">
+            <h3><a href="{{ url_for('shipazhay_detail', slug=shipazhay.slug) }}">{{ shipazhay.name }}</a></h3>
+            {% if shipazhay.image %}
+                <a href="{{ url_for('shipazhay_detail', slug=shipazhay.slug) }}"><img src="{{ url_for('static', filename=shipazhay.image) }}" alt="{{ shipazhay.name }}"></a>
+            {% endif %}
+            <p>{{ shipazhay.description_short }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p style="text-align: center;">Скоро здесь появятся лучшие предложения!</p>
+{% endif %}
+</div>
+{% endblock %}
