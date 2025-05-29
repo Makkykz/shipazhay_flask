@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block page_header %}{{ title }}{% endblock %}
+
+{% block extrastyles %}
+<style>
+    .shipazhay-item {
+        border: 1px solid #ddd;
+        margin-bottom: 20px; /* Увеличил отступ */
+        padding: 20px; /* Увеличил отступы */
+        border-radius: 5px;
+        background-color: #fff;
+        overflow: hidden; 
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .shipazhay-item img {
+        max-width: 200px; /* Сделал картинку чуть больше */
+        height: auto;
+        float: left; 
+        margin-right: 20px;
+        margin-bottom: 10px; /* Отступ снизу, если текст короткий */
+        border-radius: 4px;
+    }
+    .shipazhay-item h3 {
+        margin-top: 0;
+        margin-bottom: 10px; /* Отступ под заголовком */
+    }
+    .shipazhay-item p {
+        margin-bottom: 5px; /* Меньше отступ между параграфами */
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+{% if shipazhays %}
+    {% for shipazhay in shipazhays %}
+        <div class="shipazhay-item">
+            {% if shipazhay.image %}
+                <a href="{{ url_for('shipazhay_detail', slug=shipazhay.slug) }}"><img src="{{ url_for('static', filename=shipazhay.image) }}" alt="{{ shipazhay.name }}"></a>
+            {% endif %}
+            <h3><a href="{{ url_for('shipazhay_detail', slug=shipazhay.slug) }}">{{ shipazhay.name }}</a></h3>
+            <p><strong>Расположение:</strong> {{ shipazhay.location }}</p>
+            <p>{{ shipazhay.description_short }}</p>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Информация о шипажаях скоро появится.</p>
+{% endif %}
+{% endblock %}

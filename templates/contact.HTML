@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>{{ title }}</h1>
+        <p><a href="{{ url_for('home') }}">На главную</a> | <a href="{{ url_for('shipazhay_list') }}">Все шипажаи</a> | <a href="{{ url_for('about') }}">О нас</a></p>
+    </header>
+    <main>
+        <p>Если у вас есть вопросы, пишите нам на email: olzhas.kz@gmail.com </p>
+        <p>Или звоните по телефону: +7747456789</p>
+    </main>
+</body>
+</html>

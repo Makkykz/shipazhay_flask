@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Блок для заголовка страницы, который будет переопределяться в дочерних шаблонах -->
+    <title>{% block title %}Шипажай Казахстана{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Блок для дополнительных CSS-стилей, если нужны на конкретной странице -->
+    {% block extrastyles %}{% endblock %}
+</head>
+<body>
+    <header>
+        <!-- Заголовок H1 может быть общим или переопределяться -->
+        <h1>{% block page_header %}Добро пожаловать в Шипажай!{% endblock %}</h1>
+            <nav>
+        <a href="{{ url_for('home') }}">Главная</a> |
+        <a href="{{ url_for('shipazhay_list') }}">Все Шипажаи</a> |
+        <a href="{{ url_for('booking_form') }}">Бронирование</a> | {# <--- ДОБАВЛЕНА ЭТА ССЫЛКА #}
+        <a href="{{ url_for('about') }}">О нас</a> |
+        <a href="{{ url_for('contact') }}">Контакты</a>
+    </nav>
+    </header>
+
+    <main>
+        <!-- Основной контент страницы будет вставляться сюда -->
+        {% block content %}
+        <p>Это контент по умолчанию из базового шаблона. Вы должны переопределить этот блок.</p>
+        {% endblock %}
+    </main>
+
+    <footer>
+        <p>© 2025 Шипажай</p>
+    </footer>
+
+    <!-- Блок для JavaScript файлов, если нужны -->
+    {% block extrascripts %}{% endblock %}
+</body>
+</html>

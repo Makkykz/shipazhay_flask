@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block title %}Бронирование Шипажая{% endblock %}
+
+{% block page_header %}Оформление заявки на бронирование{% endblock %}
+
+{% block extrastyles %}
+<style>
+    .booking-form {
+        max-width: 600px;
+        margin: 20px auto;
+        padding: 25px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .form-group {
+        margin-bottom: 20px;
+    }
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"],
+    .form-group input[type="date"],
+    .form-group input[type="number"],
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box; 
+        font-size: 1em;
+    }
+    .form-group textarea {
+        min-height: 100px;
+        resize: vertical;
+    }
+    .form-group input[type="submit"] {
+        background-color: #007bff;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+    }
+    .form-group input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+    .form-group h3 {
+        color: #0056b3;
+        margin-top: 0;
+        margin-bottom: 15px;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 10px;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<form class="booking-form" method="POST" action="{{ url_for('submit_booking') }}">
+    
+    {% if shipazhay_name %}
+        <input type="hidden" name="shipazhay_name" value="{{ shipazhay_name }}">
+        <div class="form-group">
+            <h3>Вы бронируете: {{ shipazhay_name }}</h3>
+        </div>
+    {% else %}
+        <div class="form-group">
+            <label for="shipazhay_select">Выберите Шипажай/Программу:<span style="color:red;">*</span></label>
+            <select name="shipazhay_name" id="shipazhay_select" required>
+                <option value="">-- Пожалуйста, выберите --</option>
+                {% for s in all_shipazhays_for_booking %}
+                    <option value="{{ s.name }}">{{ s.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    {% endif %}
+
+    <div class="form-group">
+        <label for="full_name">Ваше ФИО:<span style="color:red;">*</span></label>
+        <input type="text" id="full_name" name="full_name" required>
+    </div>
+
+    <div class="form-group">
+        <label for="phone">Контактный телефон:<span style="color:red;">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="+7 (XXX) XXX-XX-XX" required>
+    </div>
+
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="example@mail.com">
+    </div>
+
+    <div class="form-group">
+        <label for="date_from">Дата заезда:<span style="color:red;">*</span></label>
+        <input type="date" id="date_from" name="date_from" required>
+    </div>
+
+    <div class="form-group">
+        <label for="date_to">Дата выезда:<span style="color:red;">*</span></label>
+        <input type="date" id="date_to" name="date_to" required>
+    </div>
+
+    <div class="form-group">
+        <label for="adults">Количество взрослых:<span style="color:red;">*</span></label>
+        <input type="number" id="adults" name="adults" min="1" value="1" required>
+    </div>
+
+    <div class="form-group">
+        <label for="children">Количество детей (до 12 лет):</label>
+        <input type="number" id="children" name="children" min="0" value="0">
+    </div>
+
+    <div class="form-group">
+        <label for="comments">Комментарии/Пожелания:</label>
+        <textarea id="comments" name="comments" rows="3" placeholder="Ваши особые пожелания..."></textarea>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Отправить заявку">
+    </div>
+</form>
+{% endblock %}

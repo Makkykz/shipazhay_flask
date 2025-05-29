@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block title %}Заявка принята!{% endblock %}
+
+{% block page_header %}Ваша заявка на бронирование принята!{% endblock %}
+
+{% block extrastyles %}
+<style>
+    .confirmation-box {
+        text-align: center; 
+        padding: 30px; 
+        background-color: #e6ffed; 
+        border: 1px solid #b2dfc1; 
+        border-radius: 8px; 
+        max-width: 650px; 
+        margin: 30px auto;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .confirmation-box h2 {
+        color: #155724; /* Темно-зеленый для успеха */
+        margin-bottom: 15px;
+    }
+    .confirmation-box p {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        line-height: 1.6;
+    }
+    .confirmation-box ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 15px;
+        text-align: left; /* Выравнивание списка по левому краю */
+        display: inline-block; /* Чтобы центрировать список как блок */
+    }
+    .confirmation-box ul li {
+        margin-bottom: 8px;
+    }
+    .confirmation-box strong {
+        color: #004085; /* Синий для выделения */
+    }
+    .home-button {
+        display: inline-block;
+        margin-top: 25px;
+        padding: 12px 25px; 
+        background-color: #007bff; 
+        color: white; 
+        text-decoration: none; 
+        border-radius: 5px;
+        font-size: 1.1em;
+        transition: background-color 0.3s ease;
+    }
+    .home-button:hover {
+        background-color: #0056b3;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="confirmation-box">
+    {% if booking %}
+        <h2>Спасибо, {{ booking.full_name }}!</h2>
+        <p>Мы получили вашу заявку на бронирование для <strong>{{ booking.shipazhay_name }}</strong>.</p>
+        <p><strong>Детали вашей заявки:</strong></p>
+        <ul>
+            <li><strong>Дата заезда:</strong> {{ booking.date_from }}</li>
+            <li><strong>Дата выезда:</strong> {{ booking.date_to }}</li>
+            <li><strong>Взрослых:</strong> {{ booking.adults }}</li>
+            {% if booking.children and booking.children != '0' %}
+            <li><strong>Детей:</strong> {{ booking.children }}</li>
+            {% endif %}
+        </ul>
+        <p>Номер вашей заявки: <strong>{{ booking.id }}</strong></p>
+        <p>Наш менеджер свяжется с вами в ближайшее время по телефону: <strong>{{ booking.phone }}</strong>{% if booking.email %} или email: <strong>{{ booking.email }}</strong>{% endif %}.</p>
+    {% else %}
+        <h2>Произошла ошибка</h2>
+        <p>К сожалению, мы не смогли найти детали вашего бронирования. Пожалуйста, попробуйте еще раз или свяжитесь с нами.</p>
+    {% endif %}
+    <a href="{{ url_for('home') }}" class="home-button">Вернуться на главную</a>
+</div>
+{% endblock %}
