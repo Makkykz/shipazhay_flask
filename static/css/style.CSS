@@ -1,0 +1,186 @@
+/* Общие стили для body */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Более современный шрифт */
+    line-height: 1.7; /* Увеличим межстрочный интервал для читаемости */
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Очень светлый серый фон */
+    color: #343a40; /* Темно-серый для основного текста */
+    display: flex; /* Используем flexbox для прижатия footer к низу */
+    flex-direction: column; /* Элементы будут располагаться вертикально */
+    min-height: 100vh; /* Минимальная высота body равна высоте экрана */
+}
+
+/* Стили для шапки (header) */
+header {
+    background: #007bff; /* Яркий синий цвет (Bootstrap primary) */
+    /* Можно использовать градиент: background: linear-gradient(90deg, #007bff, #0056b3); */
+    color: #ffffff;
+    padding: 1.5rem 0; /* Увеличим отступы */
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Небольшая тень под шапкой */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2.2em; /* Немного увеличим главный заголовок */
+    font-weight: 300; /* Более легкий шрифт для заголовка */
+}
+
+/* Стили для навигации в шапке */
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    color: #e9ecef; /* Светло-серый для ссылок, чтобы не так ярко */
+    text-decoration: none;
+    margin: 0 15px; /* Отступы между ссылками */
+    font-size: 1.1em;
+    transition: color 0.3s ease; /* Плавное изменение цвета при наведении */
+}
+
+nav a:hover, nav a:focus {
+    color: #ffffff; /* Белый при наведении */
+    text-decoration: underline;
+}
+
+/* Стили для основного контента (main) */
+main {
+    flex-grow: 1; /* Позволяет main занять все доступное пространство, прижимая footer */
+    padding: 25px;
+    max-width: 960px; /* Немного увеличим максимальную ширину контента */
+    margin: 30px auto; /* Увеличим отступы сверху/снизу */
+    background: #ffffff;
+    border-radius: 8px; /* Более скругленные углы */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08); /* Более выраженная тень */
+}
+
+/* Общие стили для заголовков внутри main */
+main h2 {
+    color: #0056b3; /* Синий цвет для подзаголовков */
+    margin-top: 0; /* Убираем отступ, если это первый элемент в блоке */
+    margin-bottom: 20px;
+    border-bottom: 2px solid #e9ecef; /* Линия под заголовком */
+    padding-bottom: 10px;
+}
+main h3 {
+    color: #0069d9;
+}
+
+/* Стили для ссылок в основном контенте */
+main a {
+    color: #007bff;
+    text-decoration: none;
+}
+main a:hover, main a:focus {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* Стили для подвала (footer) */
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #343a40; /* Темно-серый фон для подвала */
+    color: #adb5bd; /* Светло-серый текст в подвале */
+    margin-top: auto; /* Прижимает футер к низу, если контента мало */
+}
+
+/* Дополнительные стили для карточек из index.html (если вы их использовали в extrastyles) */
+/* Можно перенести их сюда для единообразия */
+.featured-container {
+    text-align: center;
+    padding: 20px 0;
+}
+
+.featured-shipazhay {
+    border: 1px solid #e0e0e0; /* Более мягкая граница */
+    padding: 20px;
+    margin: 10px;
+    display: inline-block;
+    width: calc(33.333% - 40px); /* Пытаемся сделать 3 в ряд, учитывая margin */
+    min-width: 280px; /* Минимальная ширина, чтобы не слишком сжимались */
+    max-width: 320px; /* Максимальная ширина */
+    vertical-align: top;
+    background-color: #fff;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+    text-align: left;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out; /* Анимация при наведении */
+}
+.featured-shipazhay:hover {
+    transform: translateY(-5px); /* Приподнимаем карточку */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Увеличиваем тень */
+}
+
+.featured-shipazhay img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+.featured-shipazhay h3 {
+    margin-top: 0;
+    font-size: 1.3em;
+    margin-bottom: 10px;
+}
+.featured-shipazhay h3 a {
+    color: #0056b3; /* Цвет заголовка-ссылки */
+}
+
+/* Стили для списка шипажаев (shipazhay_list.html) */
+.shipazhay-item {
+    border: 1px solid #e0e0e0;
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: 6px;
+    background-color: #fff;
+    overflow: hidden; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.07);
+}
+.shipazhay-item img {
+    max-width: 220px; 
+    height: auto;
+    float: left; 
+    margin-right: 25px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+.shipazhay-item h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.shipazhay-item h3 a {
+    color: #0056b3;
+}
+
+/* Стили для детальной страницы (shipazhay_detail.html) */
+.shipazhay-detail-img {
+    max-width: 60%; /* Можно настроить */
+    display: block; 
+    margin: 0 auto 30px auto; 
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.detail-content {
+    max-width: 750px;
+    margin: 0 auto;
+    padding: 20px;
+    /* background-color: #fff; убрал, т.к. main уже белый */
+    /* border-radius: 5px; убрал, т.к. main уже скруглен */
+}
+.detail-content p {
+    text-align: justify;
+    line-height: 1.8; /* Еще немного увеличим для длинных текстов */
+    margin-bottom: 18px;
+}
+.detail-content strong {
+    color: #007bff; /* Ярче выделим */
+}
+
+/* Убираем стили из блоков <style> в HTML-шаблонах */
+/* Если вы добавляли стили напрямую в HTML через <style> в блоках {% extrastyles %}, */
+/* теперь, когда мы перенесли их сюда, эти блоки <style> в HTML можно удалить или оставить пустыми: */
+/* {% block extrastyles %}{% endblock %} */
